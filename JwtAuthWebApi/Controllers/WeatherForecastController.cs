@@ -1,4 +1,7 @@
 using JwtAuthWebApi.Models;
+using JwtAuthWebApi.Utils;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JwtAuthWebApi.Controllers
@@ -29,6 +32,7 @@ namespace JwtAuthWebApi.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
+        [Authorize(Policy = Constants.Policies.ADMINISTRATOR_ONLY)]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
